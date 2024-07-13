@@ -1,0 +1,30 @@
+
+
+
+application:
+   version: 0.0.2
+
+spring-boot:
+   version: 2.7.12
+
+server:
+  port: 9005
+  
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db2
+    username: root
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        dailect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  application:
+    name: springbootbannerexample-2
+    
+      
+

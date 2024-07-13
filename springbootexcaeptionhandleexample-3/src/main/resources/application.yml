@@ -1,0 +1,22 @@
+
+
+server:
+  port: 9000
+
+spring:
+   application:
+      name: springbootexcaeptionhandleexample-3   
+        
+   datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/db3
+    username: root
+    password: root
+    
+   jpa:
+    properties:
+      hibernate:
+        dailect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
