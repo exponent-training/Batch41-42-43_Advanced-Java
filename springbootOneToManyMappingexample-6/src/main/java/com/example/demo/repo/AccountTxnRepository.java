@@ -8,4 +8,7 @@ import com.example.demo.entity.AccountData;
 @Repository
 public interface AccountTxnRepository extends JpaRepository<AccountData, Integer>{
 
+	
+	AccountData findByAccountNumber(String accNumber);
+	
 }

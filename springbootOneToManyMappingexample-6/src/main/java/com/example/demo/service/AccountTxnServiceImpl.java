@@ -12,7 +12,7 @@ import com.example.demo.repo.AccountTxnRepository;
 @Service
 public class AccountTxnServiceImpl implements AccountTxnService {
 
-	
+
 	@Autowired
 	private AccountTxnRepository accountTxnRepository;
 	
@@ -21,6 +21,19 @@ public class AccountTxnServiceImpl implements AccountTxnService {
 		// TODO Auto-generated method stub
 		//Random 8 digit Number Generated . but in Sequence.
 		//Ex : SBIN/00000001
+		
+		 long count = accountTxnRepository.count();
+		 
+		 System.out.println("DB Count : " + count);
+		 
+		 if(count == 0) {
+			 count += 1; 
+		 }else if(count > 0) {
+			  count ++;
+		 }
+		
+		accountData.setAccountNumber("SBIN"+count);
+		
 		
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
@@ -34,4 +47,14 @@ public class AccountTxnServiceImpl implements AccountTxnService {
 		return accountData2.getId();
 	}
 
+	@Override
+	public AccountData getAccountData(int accnumber) {
+		// TODO Auto-generated method stub
+		
+		String accNumber  = "SBIN"+accnumber;
+		AccountData accountData = accountTxnRepository.findByAccountNumber(accNumber);
+		return accountData;
+	}
+	
+	
 }
