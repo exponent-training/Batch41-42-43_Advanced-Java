@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.AccountData;
@@ -15,6 +17,10 @@ public class AccountTxnServiceImpl implements AccountTxnService {
 
 	@Autowired
 	private AccountTxnRepository accountTxnRepository;
+	
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 	
 	@Override
 	public int createAccount(AccountData accountData) {
@@ -43,6 +49,21 @@ public class AccountTxnServiceImpl implements AccountTxnService {
 		accountData.setStatus(true);
 		
 		AccountData accountData2 = accountTxnRepository.save(accountData);
+		
+		if(accountData2 != null) {
+			
+			SimpleMailMessage message = new SimpleMailMessage();
+			
+			message.setTo("pramodkhandare0050@gmail.com","andhalekrushna101@gmail.com");
+			
+			message.setSubject("Thanks For Creating Account.");
+			
+			message.setText("Hi Team,  Thank you for Getting Our Service. Your Account Succeassfully Created.");
+		
+			
+			javaMailSender.send(message);
+			
+		}
 		
 		return accountData2.getId();
 	}
