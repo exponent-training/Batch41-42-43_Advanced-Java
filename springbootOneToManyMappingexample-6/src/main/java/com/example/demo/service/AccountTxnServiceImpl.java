@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+import java.util.stream.LongStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -9,6 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.AccountData;
+import com.example.demo.entity.TransactionData;
 import com.example.demo.repo.AccountTxnRepository;
 
 @Service
@@ -75,6 +78,50 @@ public class AccountTxnServiceImpl implements AccountTxnService {
 		String accNumber  = "SBIN"+accnumber;
 		AccountData accountData = accountTxnRepository.findByAccountNumber(accNumber);
 		return accountData;
+	}
+
+	@Override
+	public void addTXTData(TransactionData txtData, int accno) {
+		// TODO Auto-generated method stub
+		AccountData accountData = getAccountData(accno);
+		if(accountData != null) {
+			
+//			Random random = new Random();
+//			LongStream  l = random.longs(0, 99999999);
+//			String l1 = l.toString();
+//			System.out.println(l1);
+			
+			txtData.setTxnId("12343212");
+			
+			Date date = new Date(System.currentTimeMillis());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+			String txtDate = dateFormat.format(date);
+			
+			txtData.setTxnDate(txtDate);
+			
+			//Another Account 
+			if(addOtherAccountTxt(txtData.getCreditAmount())) {
+				txtData.setTxnStatus("Success");
+			}else {
+			    txtData.setTxnStatus("Failed");	
+			}
+			accountData.getTxtList().add(txtData);
+			accountTxnRepository.save(accountData);
+		}
+	}
+	
+	
+	private boolean addOtherAccountTxt(double amount) {
+		
+		AccountData accountData = new AccountData();
+		accountData.setAccountNumber("12345678");
+		
+		if(accountData.getAccountNumber().equals("12345678")) {
+			return true;
+		}
+		
+		return false;
+		
 	}
 	
 	

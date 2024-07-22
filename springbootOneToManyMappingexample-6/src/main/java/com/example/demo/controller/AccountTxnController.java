@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.AccountData;
+import com.example.demo.entity.TransactionData;
 import com.example.demo.service.AccountTxnService;
 
 @RestController
@@ -37,5 +38,23 @@ public class AccountTxnController {
 		AccountData accountData = accountTxnService.getAccountData(accnumber);
 		return new ResponseEntity<AccountData>(accountData,HttpStatus.OK);
 	}
+	
+	
+	@PostMapping(value = "/txtDetails/{accno}")
+	public ResponseEntity<String> addTXTData(@RequestBody TransactionData txtData, @PathVariable int accno){
+		System.out.println("Check Acc number And Transaction Data : " + accno + " " + txtData);
+	    accountTxnService.addTXTData(txtData, accno);
+	    return new ResponseEntity<String>("Operation Done.",HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class AccountData {
 	private boolean status;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "a_t_id")
 	private List<TransactionData> txtList = new  ArrayList<TransactionData>();
 
@@ -113,6 +114,15 @@ public class AccountData {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+
+	public List<TransactionData> getTxtList() {
+		return txtList;
+	}
+
+	public void setTxtList(List<TransactionData> txtList) {
+		this.txtList = txtList;
 	}
 
 	@Override
