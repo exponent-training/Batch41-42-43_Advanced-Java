@@ -48,6 +48,12 @@ public class AccountTxnController {
 	}
 	
 	
+	@GetMapping(value = "/mailSendAttachment")
+	public ResponseEntity<String> sendAttachment(){
+		 accountTxnService.sendMailAttachment();
+	    return new ResponseEntity<String>("Mail Send Done.",HttpStatus.OK);
+	}
+	
 	
 	
 	

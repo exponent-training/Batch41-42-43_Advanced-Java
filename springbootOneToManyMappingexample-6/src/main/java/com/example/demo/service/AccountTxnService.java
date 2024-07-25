@@ -10,4 +10,6 @@ public interface AccountTxnService {
 	 AccountData getAccountData(int accnumber);
 	 
 	 void addTXTData(TransactionData txtData , int accno);
+	 
+	 void sendMailAttachment();
 }

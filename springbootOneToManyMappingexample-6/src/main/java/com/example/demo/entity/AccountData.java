@@ -39,6 +39,8 @@ public class AccountData {
 	@Type(type="yes_no")
 	private boolean status;
 	
+	private String email;
+	
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "a_t_id")
@@ -125,12 +127,20 @@ public class AccountData {
 		this.txtList = txtList;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "AccountData [id=" + id + ", accountNumber=" + accountNumber + ", accountType=" + accountType
 				+ ", ifscCode=" + ifscCode + ", accountHolderName=" + accountHolderName + ", bankbranch=" + bankbranch
 				+ ", totalBalance=" + totalBalance + ", accountOpeningDate=" + accountOpeningDate + ", status=" + status
-				+ "]";
+				+ ", email=" + email + "]";
 	}
 	
 
