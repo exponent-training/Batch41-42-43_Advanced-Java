@@ -13,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -163,6 +164,14 @@ public class AccountTxnServiceImpl implements AccountTxnService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<AccountData> generatecsvFileData() {
+		// TODO Auto-generated method stub
+		  List<AccountData> list = accountTxnRepository.findAll(Sort.by("email").and(Sort.by("accountNumber")).ascending());
+		  System.out.println(list);
+		  return list;
 	}
 
 
