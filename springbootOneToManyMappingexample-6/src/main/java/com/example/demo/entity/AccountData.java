@@ -4,15 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class AccountData {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private String accountNumber;
@@ -29,10 +36,13 @@ public class AccountData {
 	
 	private String accountOpeningDate;
 	
+	@Type(type="yes_no")
 	private boolean status;
 	
+	private String email;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "a_t_id")
 	private List<TransactionData> txtList = new  ArrayList<TransactionData>();
 
@@ -108,12 +118,29 @@ public class AccountData {
 		this.status = status;
 	}
 
+
+	public List<TransactionData> getTxtList() {
+		return txtList;
+	}
+
+	public void setTxtList(List<TransactionData> txtList) {
+		this.txtList = txtList;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "AccountData [id=" + id + ", accountNumber=" + accountNumber + ", accountType=" + accountType
 				+ ", ifscCode=" + ifscCode + ", accountHolderName=" + accountHolderName + ", bankbranch=" + bankbranch
 				+ ", totalBalance=" + totalBalance + ", accountOpeningDate=" + accountOpeningDate + ", status=" + status
-				+ "]";
+				+ ", email=" + email + "]";
 	}
 	
 
