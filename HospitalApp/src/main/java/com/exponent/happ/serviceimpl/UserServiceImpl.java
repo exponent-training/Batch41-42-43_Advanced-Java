@@ -6,7 +6,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.exponent.happ.dto.ResponseDto;
+import com.exponent.happ.entity.Login;
 import com.exponent.happ.entity.UserRequest;
+import com.exponent.happ.repo.LoginRepository;
 import com.exponent.happ.repo.UserRepository;
 import com.exponent.happ.service.UserServiceI;
 import com.exponent.happ.util.UserRequestIDGenerator;
@@ -15,27 +17,36 @@ import com.exponent.happ.util.UserRequestIDGenerator;
 public class UserServiceImpl implements UserServiceI{
 
 	@Autowired
-	private UserRepository userRepository;
+	private LoginRepository loginRepository;
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
 
 	@Override
-	public ResponseDto addUserRequest(UserRequest userRequest) {
+	public ResponseDto addUserRequest(Login login) {
 		// TODO Auto-generated method stub
 		ResponseDto responseDto = new ResponseDto();
-		UserRequest userRequest2 = null;
-//		UserRequest userRequest3 = userRepository.findByEmail(userRequest.getEmail());
-//		System.out.println("User  3  Calling : " + userRequest3);
-//		if(userRequest3 == null  && !(userRequest.getEmail() == null)) {
-//			System.out.println("User3 Calling");
-			if(userRequest != null) {
+		Login login2 = null;
+		if(login.getEmail() == null) {
+			System.out.println("User Email Null Calling");
+			responseDto.setMsg("User Can not be null.");
+			return responseDto;
+		}
+		Login login1 = loginRepository.findByEmail(login.getEmail());
+		System.out.println("User  3  Calling : " + login1);
+		if(login1 != null) {
+			System.out.println("User Email Null Calling");
+			responseDto.setMsg("User already Exist.");
+			return responseDto;
+		}
+			System.out.println("User3 Calling");
+			
 				System.out.println("Userid Calling");
 				String userId = UserRequestIDGenerator.generateUserID();
-				userRequest.setUsernumber(userId);
-				userRequest2 = userRepository.save(userRequest);
-			}
-			if(userRequest2 != null && userRequest2.getId() > 0 ) {
+				login.getUserRequest().setUsernumber(userId);
+				login2 = loginRepository.save(login);
+			
+			if(login2 != null && login2.getId() > 0 ) {
 				System.out.println("User success Calling");
 				responseDto.setMsg("User Successfully Registered.");
 				//Mail Sending Code .
@@ -59,7 +70,7 @@ public class UserServiceImpl implements UserServiceI{
 						"</html>");
 
 
-				javaMailSender.send(message);
+				//javaMailSender.send(message);
 				return responseDto;
 			}else {
 				System.out.println("User success Calling");
@@ -67,12 +78,6 @@ public class UserServiceImpl implements UserServiceI{
 				return responseDto;
 			}
 			
-//		}else {
-//			System.out.println("User all Calling");
-//			responseDto.setMsg("User all Ready Registered.");
-//			return responseDto;
-//		}
-
-	}
+		}
 
 }

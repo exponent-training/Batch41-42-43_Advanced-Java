@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exponent.happ.dto.ResponseDto;
+import com.exponent.happ.entity.Login;
 import com.exponent.happ.entity.UserRequest;
 import com.exponent.happ.service.UserServiceI;
 
@@ -24,9 +25,9 @@ public class UserRequestController {
 	private UserServiceI userServiceI;
 	
 	@PostMapping(value = "/save",consumes = "application/json")
-	public ResponseEntity<ResponseDto> registerUserRequest(@RequestBody UserRequest userRequest) {
-		System.out.println("Check User Request Data : " + userRequest);
-		ResponseDto responseDto = userServiceI.addUserRequest(userRequest);
+	public ResponseEntity<ResponseDto> registerUserRequest(@RequestBody Login login) {
+		System.out.println("Check User Request Data : " + login);
+		ResponseDto responseDto = userServiceI.addUserRequest(login);
 		return new ResponseEntity<ResponseDto>(responseDto,HttpStatus.OK);
 	}
 
