@@ -1,5 +1,7 @@
 package com.exponent.happ.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,4 +27,15 @@ public class AdminController {
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/allEmail")
+	public ResponseEntity<List<String>> getAllActiveEmailList(){
+		List<String> emailList = adminServiceI.getActiveEmailList();
+		return new ResponseEntity<List<String>>(emailList,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/allRole")
+	public ResponseEntity<List<String>> getAllRoleList(){
+		List<String> roleList = adminServiceI.getRoleList();
+		return new ResponseEntity<List<String>>(roleList,HttpStatus.OK);
+	}
 }

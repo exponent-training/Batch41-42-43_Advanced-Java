@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.exponent.happ.dto.ResponseDto;
 import com.exponent.happ.entity.Login;
+import com.exponent.happ.entity.Role;
 import com.exponent.happ.entity.UserRequest;
 import com.exponent.happ.repo.LoginRepository;
+import com.exponent.happ.repo.RoleRepository;
 import com.exponent.happ.repo.UserRepository;
 import com.exponent.happ.service.UserServiceI;
 import com.exponent.happ.util.UserRequestIDGenerator;
@@ -21,6 +23,9 @@ public class UserServiceImpl implements UserServiceI{
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@Override
 	public ResponseDto addUserRequest(Login login) {
@@ -44,6 +49,9 @@ public class UserServiceImpl implements UserServiceI{
 				System.out.println("Userid Calling");
 				String userId = UserRequestIDGenerator.generateUserID();
 				login.getUserRequest().setUsernumber(userId);
+				login.getUserRequest().setStatus(true);
+				Role role = roleRepository.findById(2).get();
+				login.getUserRequest().setRole(role);
 				login2 = loginRepository.save(login);
 			
 			if(login2 != null && login2.getId() > 0 ) {

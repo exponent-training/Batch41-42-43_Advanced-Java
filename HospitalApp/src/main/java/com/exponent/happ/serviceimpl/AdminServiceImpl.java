@@ -1,5 +1,7 @@
 package com.exponent.happ.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +42,17 @@ public class AdminServiceImpl implements AdminServiceI {
 			return  Response.builder().msg("Role Assigned Successfully.").build();
 		}
 		return  Response.builder().msg("Role Assigned Not Successfully.").build();
+	}
+
+	@Override
+	public List<String> getActiveEmailList() {
+		// TODO Auto-generated method stub
+		return loginRepository.findAllEmails();
+	}
+
+	@Override
+	public List<String> getRoleList() {
+		// TODO Auto-generated method stub
+		return roleRepository.findAllRole();
 	}
 }
