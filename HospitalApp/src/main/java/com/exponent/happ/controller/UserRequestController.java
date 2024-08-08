@@ -30,5 +30,5 @@ public class UserRequestController {
 		ResponseDto responseDto = userServiceI.addUserRequest(login);
 		return new ResponseEntity<ResponseDto>(responseDto,HttpStatus.OK);
 	}
-
+  
 }

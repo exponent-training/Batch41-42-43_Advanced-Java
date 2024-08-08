@@ -3,6 +3,7 @@ package com.exponent.happ.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.exponent.happ.dto.Response;
 import com.exponent.happ.dto.UserResponseDto;
 import com.exponent.happ.entity.Login;
 import com.exponent.happ.entity.UserRequest;
@@ -37,6 +38,21 @@ public class LoginServiceImpl implements LoginService{
 			userResponseDto.setErrorMsg("User Can not Find.");
 			return userResponseDto;
 		}
+	}
+
+	@Override
+	public Response forgotPassword(String email, String pass) {
+		// TODO Auto-generated method stub
+		Response response = new Response();
+		Login login = loginRepository.findByEmail(email);
+		login.setPassword(pass);
+		Login login2 = loginRepository.save(login);
+		if(login2 != null) {
+			response.setMsg("Password updated successfully.");
+		}else {
+			response.setMsg("Password not updated successfully.");
+		}
+		return response;
 	}
 
 }
