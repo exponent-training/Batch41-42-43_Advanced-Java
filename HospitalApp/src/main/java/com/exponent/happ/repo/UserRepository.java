@@ -11,6 +11,6 @@ import com.exponent.happ.entity.UserRequest;
 @Repository
 public interface UserRepository extends JpaRepository<UserRequest, Integer>{
 
-	
+	UserRequest findByUsernumber(String usernumber);
 	
 }
