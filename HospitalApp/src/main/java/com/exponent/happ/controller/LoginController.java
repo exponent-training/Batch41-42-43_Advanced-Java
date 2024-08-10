@@ -15,8 +15,11 @@ import com.exponent.happ.dto.UserResponseDto;
 import com.exponent.happ.entity.Login;
 import com.exponent.happ.service.LoginService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
 public class LoginController {
 	
 	@Autowired
@@ -24,7 +27,11 @@ public class LoginController {
 
 	@PostMapping(value = "/login")
 	public ResponseEntity<UserResponseDto> getLoginData(@RequestBody Login login){
-		System.out.println("Login Credentials Check : " + login);
+		//System.out.println("Login Credentials Check : " + login);
+		log.info("Checking Login Data INFO : " + login);
+		log.warn("Checking Login Data WARN : " + login);
+		log.debug("Checking Login Data DEBUG : " + login);
+		log.trace("Checking Login Data TRACE: " + login);
 		UserResponseDto userResponseDto = loginService.getLoginData(login.getEmail(), login.getPassword());
 		return new ResponseEntity<UserResponseDto>(userResponseDto,HttpStatus.OK);
 	}
