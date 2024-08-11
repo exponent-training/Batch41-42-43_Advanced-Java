@@ -58,6 +58,8 @@ public class Appointment {
 	
 	private String zipcode;
 	
+	private String doctornumber;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private UserRequest userRequest;
 }
