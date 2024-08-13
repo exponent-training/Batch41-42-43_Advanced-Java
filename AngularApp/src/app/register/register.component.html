@@ -1,0 +1,20 @@
+<h1>Register works!</h1>
+Name OF App : <input type="text"  [(ngModel)]="name">
+<p [style.color]="'red'">{{name}}</p>
+
+<div>
+   <form>
+    Fisrtname : <input type="text" [(ngModel)]="regsiter.firstname" [ngModelOptions]="{standalone: true}" > <br><br>
+    Lastname : <input type="text" [(ngModel)]="regsiter.lastname" [ngModelOptions]="{standalone: true}" > <br><br>
+    Address : <input type="text" [(ngModel)]="regsiter.address" [ngModelOptions]="{standalone: true}" > <br><br>
+    Zipcode : <input type="text" [(ngModel)]="regsiter.zipcode" [ngModelOptions]="{standalone: true}" > <br><br>
+    Country : <input type="text" [(ngModel)]="regsiter.country" [ngModelOptions]="{standalone: true}" > <br><br>
+    Mob.Number : <input type="text" [(ngModel)]="regsiter.mobNumber" [ngModelOptions]="{standalone: true}" > <br><br>
+    Gender : <input type="radio" [(ngModel)]="regsiter.gender"  name="gender" value="male" >Male 
+    &nbsp;&nbsp;<input type="radio" [(ngModel)]="regsiter.gender"  name="gender" value="female" >Female <br><br>
+     Email : <input type="email" [(ngModel)]="login.email" [ngModelOptions]="{standalone: true}">
+     Password : <input type="password" [(ngModel)]="login.password" [ngModelOptions]="{standalone: true}">
+
+    <input type="submit" value="Register" (click)="addingData();">
+</form>
+</div>
