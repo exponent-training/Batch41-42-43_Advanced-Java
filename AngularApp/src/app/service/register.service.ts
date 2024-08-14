@@ -14,6 +14,6 @@ export class RegisterService {
   registerData(login:Login){
     console.log("Calling From RG component");
     console.log(login);
-    this.http.post(this.url+'/save',login).subscribe();
+    return this.http.post(this.url+'/save',login)
   }
 }
