@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.exponent.happ.dto.AppointmentDto;
 import com.exponent.happ.dto.ResponseDto;
 import com.exponent.happ.dto.UserRequestDto;
 import com.exponent.happ.entity.Appointment;
@@ -18,6 +19,7 @@ import com.exponent.happ.repo.LoginRepository;
 import com.exponent.happ.repo.RoleRepository;
 import com.exponent.happ.repo.UserRepository;
 import com.exponent.happ.service.UserServiceI;
+import com.exponent.happ.util.AllDTOConverter;
 import com.exponent.happ.util.UserRequestIDGenerator;
 
 import lombok.extern.slf4j.Slf4j;
@@ -114,9 +116,16 @@ public class UserServiceImpl implements UserServiceI{
 	@Override
 	public UserRequestDto getUserReuestAppointmentData(String usernumber) {
 		// TODO Auto-generated method stub
+		UserRequestDto userRequestDto = null;
+		UserRequest user = userRepository.findByUsernumber(usernumber);
+		if(user!=null) {
+			userRequestDto = AllDTOConverter.convertUserRequestDto(user);
+		}
 		List<Appointment> appointments = appointmentRepository.findByUserRequestUsernumber(usernumber);
 		log.debug("Appointment List : " + appointments);
-		return null;
+		List<AppointmentDto> appointmentDtos = AllDTOConverter.convertAppointmentDto(appointments);
+		userRequestDto.setAppointmentDtos(appointmentDtos);
+		return userRequestDto;
 	}
 
 }
