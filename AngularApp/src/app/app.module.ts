@@ -9,13 +9,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import { UserComponent } from './user/user.component';
+import { DoctorComponent } from './doctor/doctor.component';
+import { NurseComponent } from './nurse/nurse.component';
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     HomeComponent,
     PagenotfoundComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent,
+    UserComponent,
+    DoctorComponent,
+    NurseComponent
   ],
   imports: [
     BrowserModule,
