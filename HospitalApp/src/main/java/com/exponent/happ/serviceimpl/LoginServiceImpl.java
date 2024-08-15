@@ -29,6 +29,7 @@ public class LoginServiceImpl implements LoginService{
 				userResponseDto.setLastname(userRequest.getLastname());
 				userResponseDto.setEmail(login.getEmail());
 				userResponseDto.setMobNumber(userRequest.getMobNumber());
+				userResponseDto.setRolename(userRequest.getRole().getRolename());
 				return userResponseDto;
 			}else {
 				userResponseDto.setErrorMsg("Access Denied.Plese Contact your administrator.");
