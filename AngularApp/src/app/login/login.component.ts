@@ -19,16 +19,22 @@ constructor(private loginService : LoginService,private router :Router){
  userResponse = new UserResponse();
  admin : string ='admin';
  patient : string ='patient';
+ doctor : string ='doctor';
  userLogin(){
      this.loginService.login(this.login).subscribe((rs:any)=>{
         console.log(rs);
         this.userResponse = rs;
-        if(this.userResponse != null){
+        if(this.userResponse.errorMsg == null){
           if(this.userResponse.rolename === this.admin){
               this.router.navigate(['/admin']);
           } else if(this.userResponse.rolename === this.patient){
             this.router.navigate(['/patient']);
           }
+          else if(this.userResponse.rolename === this.doctor){
+            this.router.navigate(['/doctor']);
+          }
+        } else{
+           alert(this.userResponse.errorMsg);
         }
      });
 }

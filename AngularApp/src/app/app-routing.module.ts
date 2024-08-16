@@ -6,6 +6,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:"log",component:LoginComponent},
   {path:"admin",component:AdminComponent},
   {path:"patient",component:UserComponent},
+  {path:"doctor",component:DoctorComponent},
   {path:"**",component:PagenotfoundComponent}
 ];
 

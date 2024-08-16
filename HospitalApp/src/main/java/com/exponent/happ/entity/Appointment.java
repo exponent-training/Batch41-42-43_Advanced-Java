@@ -62,4 +62,6 @@ public class Appointment {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private UserRequest userRequest;
+	
+	private String status; 
 }
