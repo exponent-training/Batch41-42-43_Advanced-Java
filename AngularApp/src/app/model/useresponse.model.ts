@@ -7,5 +7,6 @@ export class  UserResponse{
 	email!:"";
     errorMsg!:"";
     rolename!:"";
+    token!:"";
 
 }

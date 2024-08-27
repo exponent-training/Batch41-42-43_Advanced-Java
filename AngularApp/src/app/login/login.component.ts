@@ -25,6 +25,8 @@ constructor(private loginService : LoginService,private router :Router){
         console.log(rs);
         this.userResponse = rs;
         if(this.userResponse.errorMsg == null){
+          sessionStorage.setItem("token",this.userResponse.token);
+          sessionStorage.setItem("user",this.userResponse.usernumber);
           if(this.userResponse.rolename === this.admin){
               this.router.navigate(['/admin']);
           } else if(this.userResponse.rolename === this.patient){

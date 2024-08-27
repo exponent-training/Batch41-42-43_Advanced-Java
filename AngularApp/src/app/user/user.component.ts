@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
+
+constructor(private userService: UserService){
+
+}
+
+  getUser(){
+    this.userService.getUserData().subscribe();
+  }
 
 }
