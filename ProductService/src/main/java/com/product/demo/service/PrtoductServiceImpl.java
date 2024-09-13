@@ -27,4 +27,11 @@ public class PrtoductServiceImpl implements ProductService{
 		productRepository.save(product);
 	}
 
+	@Override
+	public Product getProduct(String name) {
+		// TODO Auto-generated method stub
+		Product product = productRepository.findByName(name);
+		return product;
+	}
+
 }

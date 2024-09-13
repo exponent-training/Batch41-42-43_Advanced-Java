@@ -9,4 +9,6 @@ public interface ProductService {
 	List<Product> fetchAllProducts();
 	
 	void saveProduct(Product product);
+	
+	Product getProduct(String name);
 }
