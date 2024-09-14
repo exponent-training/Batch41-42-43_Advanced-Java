@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserServiceI{
 	@Override
 	public Product getProduct(String name) {
 		// TODO Auto-generated method stub
-		Product product = restTemplate.getForObject("http://localhost:9001/find/"+name, Product.class);
+		Product product = restTemplate.getForObject("http://localhost:9090/products/find/"+name, Product.class);
 		if(product == null) {
 			Product product1 = new Product();
 		   	product1.setMsg("Not Found");
