@@ -13,4 +13,5 @@ public interface ProductFeignClient {
 	@GetMapping(path = "/find/{name}")
 	Product findProductByName(@PathVariable String name);
 	
+	
 }
